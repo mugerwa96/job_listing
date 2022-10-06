@@ -1,30 +1,12 @@
 @extends('layouts.app')
 @section('title')
-HOME
+ALL
 @endsection
 @section('content')
 <div class="container ">
 <div class="row justify-content-center">
     <div class="col-md-8 ">
 
-        {{-- search form-container --}}
-                <div class="job-search shadow py-5">
-                        <div class="job-search-title">
-                            <i class="fab fa-joomla fa-4x site-primary-color"></i>
-                                <h1 class="py-2 fw-bold">FIND A JOB</h1>
-                                    <form action="{{ route('search') }} "method="POST">
-                                       @csrf
-                                        <select class="form-select form-select"name="category" aria-label=".form-select-sm example">
-                                            <option value="" >Choose a Category</option>
-                                            <option value="Technology">Technology</option>
-                                            <option value="Business">Business</option>
-                                            <option value="Retail">Retail</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary my-3"> <i class="fab fa-searchengin mx-2"></i> FIND NOW </button>
-                                    </form>
-                        </div>
-                </div>
-           {{-- search form-container --}}
 
 
 
@@ -33,7 +15,7 @@ HOME
            <div class="latest-job-container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                        <h3 class="fw-bold text-muted mb-5">Latest Jobs  ({{ $jobs->count()}}) </h3>
+                        <h3 class="fw-bold text-muted mb-5">All My Listings ( {{ $jobs->count() }} ) </h3>
 
                        @foreach ($jobs as $job)
 
@@ -54,7 +36,7 @@ HOME
                                         @endif
                                         @auth
                                         <br>
-                                        {{-- @if (Auth::id()==$job->user_id)
+                                        @if (Auth::id()==$job->user_id)
                                             <a href="{{ route('destroy',$job->id) }}"class="text-decoration-none">
                                                 <span class="badge bg-danger"><i class="fas fa-trash-can mx-1"></i> Delete</span>
                                             </a> &nbsp;
@@ -62,7 +44,7 @@ HOME
                                                 <span class="badge bg-warning"><i class="fas fa-pen mx-1"></i> Edit</span>
                                             </a>
 
-                                        @endif --}}
+                                        @endif
                                         <br>
 
                                         @endauth

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\job;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $jobs=job::where('status',1)->orderBy('updated_at','desc')
+        ->paginate(5);
+        return view('welcome',compact('jobs'));
+
     }
 }

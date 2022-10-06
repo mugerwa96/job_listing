@@ -1,39 +1,21 @@
 @extends('layouts.app')
-@section('title')
-HOME
-@endsection
+@section('title','SEARCH')
 @section('content')
 <div class="container ">
-<div class="row justify-content-center">
-    <div class="col-md-8 ">
-
-        {{-- search form-container --}}
-                <div class="job-search shadow py-5">
-                        <div class="job-search-title">
-                            <i class="fab fa-joomla fa-4x site-primary-color"></i>
-                                <h1 class="py-2 fw-bold">FIND A JOB</h1>
-                                    <form action="{{ route('search') }} "method="POST">
-                                       @csrf
-                                        <select class="form-select form-select"name="category" aria-label=".form-select-sm example">
-                                            <option value="" >Choose a Category</option>
-                                            <option value="Technology">Technology</option>
-                                            <option value="Business">Business</option>
-                                            <option value="Retail">Retail</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary my-3"> <i class="fab fa-searchengin mx-2"></i> FIND NOW </button>
-                                    </form>
-                        </div>
-                </div>
-           {{-- search form-container --}}
-
-
+    <div class="row justify-content-center">
+        <div class="col-md-8 ">
 
            {{-- latest_job-container-start --}}
 
-           <div class="latest-job-container mt-5">
+           <div class="latest-job-container ">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                        <h3 class="fw-bold text-muted mb-5">Latest Jobs  ({{ $jobs->count()}}) </h3>
+                    <span ">
+                        <a href="{{ route('welcome') }}">
+                            <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-angle-left mx-2"></i> Go Back</button>
+                        </a>
+                    </span>
+                        <h3 class="fw-bold text-muted mb-5 mt-3">Search Results  ( {{ $jobs->count() }} ) </h3>
 
                        @foreach ($jobs as $job)
 
@@ -53,16 +35,11 @@ HOME
                                         </a>
                                         @endif
                                         @auth
-                                        <br>
-                                        {{-- @if (Auth::id()==$job->user_id)
-                                            <a href="{{ route('destroy',$job->id) }}"class="text-decoration-none">
-                                                <span class="badge bg-danger"><i class="fas fa-trash-can mx-1"></i> Delete</span>
-                                            </a> &nbsp;
-                                            <a href="{{ route('edit',$job->id) }}" class="text-decoration-none">
-                                                <span class="badge bg-warning"><i class="fas fa-pen mx-1"></i> Edit</span>
-                                            </a>
+                                            @if (Auth::id()==$job->user_id)
 
-                                        @endif --}}
+                                            <button type="button" class="btn btn-danger btn-sm my-2"><i class="fas fa-trash-can mx-2"></i> </button>
+                                            <button type="button" class="btn btn-warning btn-sm my-2"><i class="fas fa-pen-to-square mx-2"></i> </button>
+                                            @endif
                                         <br>
 
                                         @endauth
@@ -88,22 +65,22 @@ HOME
                                 </div>
                                 <div class="job-continaer-view">
                                     <a href="{{ route('show',$job->id) }}">
-
                                         <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-eye mx-2"></i> View</button>
                                     </a>
+
                                 </div>
 
                             </div>
                         {{-- job-container-end --}}
                        @endforeach
 
-
-                {{ $jobs->links("pagination::bootstrap-5") }}
                 </div>
             </div>
            </div>
            {{-- latest_job-container-end --}}
+
+        </div>
     </div>
 </div>
-</div>
+
 @endsection

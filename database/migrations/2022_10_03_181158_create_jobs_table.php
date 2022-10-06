@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('company');
+            $table->string('job_title');
+            $table->integer('salary');
+            $table->string('category');
+            $table->string('location');
+            $table->string('contact_email');
+            $table->string('description');
+            $table->integer('status')->default(0);
+            $table->foreignId('user_id')->references('id')->on('users')->delete('cascade');
             $table->timestamps();
         });
     }

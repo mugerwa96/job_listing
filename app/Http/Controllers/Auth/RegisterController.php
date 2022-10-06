@@ -41,6 +41,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    // number_format()
     /**
      * Get a validator for an incoming registration request.
      *

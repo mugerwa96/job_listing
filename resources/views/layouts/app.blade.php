@@ -56,6 +56,13 @@
 
 
                 <li class="nav-item">
+
+                    <a class="nav-link {{ Request::routeIs('all')?'current':'' }}" href="{{ route('all',Auth::id()) }}">
+                        <i class="fab fa-joomla mx-2"></i> Listings <span class="badge rounded-pill bg-warning count"></span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('create')?'current':'' }}" href="{{ route('create') }}"> <i class="fas fa-plus-circle mx-2"></i>Create Job Listing</a>
                 </li>
                   <li class="nav-item dropdown">
@@ -69,6 +76,7 @@
                                            document.getElementById('logout-form').submit();">
                              <i class="fas fa-power-off"></i> {{ __('Logout') }}
                           </a>
+
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                               @csrf
@@ -112,5 +120,24 @@
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('assets/js/mdb.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
+
+    {{-- count function to retrieve all posts by an authnticated user --}}
+        <script>
+            $(document).ready(function(){
+                count();
+                function count()
+                {
+                    $.ajax({
+                        url:"{{ route('count') }}",
+                        method:"GET",
+                        success:function(response)
+                        {
+                            $('.count').text(response);
+                        }
+                    })
+                }
+            })
+        </script>
+    {{-- count function to retrieve all posts by an authnticated user --}}
 </body>
 </html>
